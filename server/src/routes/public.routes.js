@@ -1,0 +1,23 @@
+const express = require("express");
+const {
+  getAllProducts,
+  getAllCategories,
+  getProductsByCategory,
+  getProductBySlug,
+} = require("../controllers/public.controllers");
+const router = express.Router();
+
+// list all products
+router.get("/products", getAllProducts);
+
+// list all categories
+router.get("/categories", getAllCategories);
+
+// proucts by categroy
+router.get("/products/:category", getProductsByCategory);
+
+// product details
+
+router.get("/product/:slug", getProductBySlug);
+
+module.exports = router;

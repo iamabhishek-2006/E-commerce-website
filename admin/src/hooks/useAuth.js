@@ -1,0 +1,41 @@
+import { useContext, useEffect, useState } from "react"
+import { authStore } from "../store/auth.store"
+
+
+export const useAuth=()=>{
+    const {user,setUser}=useContext(authStore);
+    const [loading,setloading]=useState(true);
+
+    useEffect(()=>{
+        if(!user){
+            const token=localStorage.getItem("token");
+            const fetchInfo=async()=>{
+                try {
+                const res=await fetch("http://localhost:4000/user/me?role=admin",{
+                    method:"GET",
+                    headers:{
+                        Authorization:`Bearer ${token}`,
+                    },
+                })
+                const data=await res.json();
+                if(data.success || data.data.role ==="admin"){
+                    setUser(data.data);
+                }  else{
+                    throw new Error();
+                }
+                } catch (error) {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("refToken");
+
+                    // show toast
+                    // console.log(error);
+                }finally{
+                    setloading(false);
+                }
+                }
+                fetchInfo()
+                  }
+           },[]);
+
+    return {user,loading};
+};
