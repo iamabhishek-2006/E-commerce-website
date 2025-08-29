@@ -5,7 +5,7 @@ import { useFetch } from "@/hooks/useFetch";
 import { url } from "@/lib/utils";
 import useUserStore from "@/store/user.Store";
 import type { IProduct } from "@/types/Index";
-import { Bookmark, Loader, ShoppingCart } from "lucide-react";
+import { Heart, Loader, ShoppingCart } from "lucide-react";
 import React from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
@@ -17,9 +17,7 @@ const ProductDetails = () => {
   const { data, loading } = useFetch(`${url}/product/${slug}`);
   const [readMore, setReadMore] = React.useState(false);
 
-    const { data: products, loading: productsLoading } = useFetch(
-      "http://localhost:4000/products"
-    );
+  const { data: products, loading: productsLoading } = useFetch(  "http://localhost:4000/products");
 
 
   const addToCart=async()=>{
@@ -30,7 +28,18 @@ const ProductDetails = () => {
     }
 
     // add item into client cart
-    addCartItem({item:data._id,quantity:1});
+    // addCartItem({item:data._id,quantity:1});
+        addCartItem({
+          item: {
+            _id: data._id,
+            title: data.title,
+            price: data.price,
+            mrp: data.mrp,
+            images: [data.images[0]],
+            slug: data.slug,
+          },
+          quantity: 1,
+        });
 
     // add item into server cart
     try {
@@ -47,15 +56,15 @@ const ProductDetails = () => {
     if(!json.success){
       toast.error(json.error || "something went wrong");
       removeCartItem(data._id);
-      return;
+      return false;
     }
     } catch (error) {
-    console.log("something went wrong!");
+    console.log(error);
     toast.error("something went wrong");
  
     // remove item from client cart
     removeCartItem(data._id);
-
+    return false;
     }
   }
 
@@ -66,7 +75,21 @@ const ProductDetails = () => {
       </div>
     );
 
-  const isInCart=cart?.some((item)=>item.item===data._id);
+  const isInCart=cart?.some((item)=>item.item._id===data._id);
+    const handleBuyNow = async () => {
+      // check if user is logged in
+      if (!user) {
+        router(`/signin?redirect=/product/${slug}`);
+        return;
+      }
+
+      if (isInCart) {
+        router("/cart");
+      } else {
+        const added = await addToCart();
+        if (added) router("/cart");
+      }
+    };
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -102,7 +125,7 @@ const ProductDetails = () => {
             <Button className="flex-1  hover:bg-gray-400 text-black cursor-pointer bg-amber-400" onClick={isInCart?()=>router("/cart"):addToCart}>
               <ShoppingCart /> {isInCart ? "Added Got to Cart": "Add to cart"}
             </Button>
-            <Button className="flex-1 bg-blue-500 hover:bg-blue-600 cursor-pointer">
+            <Button className="flex-1 bg-blue-500 hover:bg-blue-600 cursor-pointer" onClick={handleBuyNow}>
               Buy Now
             </Button>
           </div>
@@ -125,14 +148,13 @@ const ProductDetails = () => {
 
 
 const OtherProduct = (data: IProduct) => {
-  // console.log(data)
   return (
 
 
     <Link to={`/product/${data.slug}`} >
       <Card className="relative w-[200px] p-0 overflow-hidden gap-0">
         <div className="absolute top-2 right-2 cursor-pointer">
-          <Bookmark className="text-red-400" />
+          <Heart className="text-black" />
         </div>
         <div className="w-full h-[250px]">
           <img src={data?.images[0]?.url} alt="" className="w-full h-full object-cover" />
@@ -152,3 +174,4 @@ const OtherProduct = (data: IProduct) => {
 
 
 export default ProductDetails;
+

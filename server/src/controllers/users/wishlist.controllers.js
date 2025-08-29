@@ -1,4 +1,4 @@
-const { addWishlistDB, getWishlistDB, deleteWishlistDB, deleteWishlistAllDB } = require("../../services/users/wishlist.services");
+const { addWishlistDB, getWishlistDB, deleteWishlistDB, deleteWishlistAllDB, moveToCartDB } = require("../../services/users/wishlist.services");
 
 const getWishlist=async(req,res)=>{
     try {
@@ -27,8 +27,6 @@ const addWishlist=async (req,res)=>{
         error:"User not add to wishlist",
      })
     }
-
-
 }
 
 const deleteWishlist=async(req,res)=>{
@@ -53,4 +51,24 @@ const deleteWishlistAll=async (req,res)=>{
     }
 }
 
-module.exports={getWishlist,addWishlist,deleteWishlist,deleteWishlistAll};
+const moveToCart = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const data = await moveToCartDB(id, req.user.id);
+
+    if (!data) {
+      return res.json({ success: false, error: "something went wrong!" });
+    }
+
+    return res.json({
+      success: true,
+      message: "Wishlist item moved to cart successfully!",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.json({ success: false, error: "something went wrong!" });
+  }
+};
+
+module.exports={getWishlist,addWishlist,deleteWishlist,deleteWishlistAll,moveToCart};

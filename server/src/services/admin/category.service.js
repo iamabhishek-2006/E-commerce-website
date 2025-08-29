@@ -3,7 +3,6 @@ const category = require("../../models/category");
 const Product = require("../../models/product");
 
 const getCategroiesDB = async () => {
-  // return await category.find({});
   const categories = await category.find({}).lean();
   const categoriesWithTotal = await Promise.all(
     categories.map(async (cat) => {
@@ -25,7 +24,6 @@ const updateCategoryDB = async (id, data) => {
 
 const deleteCategoryDB = async (id) => {
     const session = await mongoose.startSession();
-  // return await category.findByIdAndDelete(id);
   try {
     const res = await session.withTransaction(async () => {
       await category.findByIdAndDelete(id, { session });

@@ -1,4 +1,4 @@
-import { TableOfContentsIcon, Search, ShoppingCart } from "lucide-react";
+import { TableOfContentsIcon, Search, ShoppingCart, Heart } from "lucide-react";
 import Sidebar from "./Sidebar";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
@@ -9,7 +9,7 @@ import { Button } from "../ui/button";
 
 const Navbar = () => {
   const { openSidebar } = useAppStore();
-  const {setUser,cart} = useUserStore()
+  const {setUser,cart,wishlist} = useUserStore()
   const { user ,loading} = useAuth();
 
 
@@ -52,40 +52,25 @@ const Navbar = () => {
         </Link>
       </div>
 
-      {/* Auth Buttons / Avatar */}
       <div className="flex items-center gap-3">
-        {/* {!user ? (
-          <>
-            <Link to="/signin" className="hover:text-blue-600">
-              Sign In
-            </Link>
-            <Link
-              to="/signup"
-              className="flex items-center gap-2 hover:text-blue-600"
-            >
-              SignUp
-              <span className="border rounded-full p-1 hover:bg-gray-200 transition">
-                <UserRound className="w-4 h-4" />
-              </span>
-            </Link>
-          </>
-        ) : (
-          <Avatar className="cursor-pointer" onClick={logOut}>
-            <AvatarFallback className="uppercase">
-              {user?.name?.[0] || "U"}
-            </AvatarFallback>
-          </Avatar>
-        )} */}
         {user ? (
           <div className="flex items-center gap-2">
-            <div className="relative">
+            <Link to="/cart" className="relative">
               {cart!?.length > 0 && (
                 <p className="text-xs bg-red-500 text-white w-4 h-4 rounded-full absolute top-[-5px] right-[-5px] flex items-center justify-center">
                   {cart?.length}
                 </p>
               )}
-              <ShoppingCart />
-            </div>
+              <ShoppingCart className="cursor-pointer" />
+            </Link>
+            <Link to="/wishlist" className="relative">
+              {wishlist!?.length > 0 && (
+                <p className="text-xs bg-red-500 text-white w-4 h-4 rounded-full absolute top-[-5px] right-[-5px] flex items-center justify-center">
+                  {wishlist?.length}
+                </p>
+              )}
+              <Heart className="cursor-pointer" />
+            </Link>
             <Button size={"sm"} onClick={logOut}>
               Log Out
             </Button>
@@ -99,7 +84,6 @@ const Navbar = () => {
         ) : (
           <Button variant="link" className="cursor-pointer">
             <Link to="/signin">Sign In</Link>
-            {/* <Link to="/signup">Sign Up</Link> */}
           </Button>
         )}
       </div>

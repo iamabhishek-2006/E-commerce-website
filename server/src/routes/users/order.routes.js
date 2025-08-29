@@ -7,6 +7,7 @@ const {
 
 const router = express.Router();
 router.get("/", getOrders);
+// router.get("/:id", getOrderDetail);
 router.post("/", createOrder);
 router.put("/cancel/:id", cancelOrder);
 

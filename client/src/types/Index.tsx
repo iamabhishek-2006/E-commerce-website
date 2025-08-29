@@ -34,11 +34,38 @@ export interface IUser {
 export interface ICart{
   _id?:string;
   quantity:number;
-  item:IProduct | string;
+  item:{
+    _id:string;
+    title:string;
+    slug:string;
+    images:IImage[];
+    price:number,
+    mrp:number;
+  }
 }
 
 export interface IWishlist {
   _id?: string;
-  item: IProduct | string;
+  item: {
+    _id: string;
+    title: string;
+    slug: string;
+    images: IImage[];
+    price:number;
+    mrp:number;
+  };
 }
 
+
+
+export interface IAddress {
+  _id: string;
+  fullName: string;
+  phone: string;
+  line1: string;
+  line2: string;
+  landmark: string;
+  city: string;
+  postalCode: string;
+  country: string;
+}

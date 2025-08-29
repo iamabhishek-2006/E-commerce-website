@@ -3,11 +3,11 @@ const Cart = require("../../models/cart");
 const getCartItemDB = async (id) => {
   return await Cart.find({ user: id });
 
-  // populate ("items"); 
 };
 
 const addCartItemsDB = async (user, item, quantity) => {
   // check if item is already in cart
+  
   const cartItem = await Cart.findOne({ user, item });
 
   if (!cartItem) {
@@ -19,17 +19,22 @@ const addCartItemsDB = async (user, item, quantity) => {
   }
 };
 
-const updateCartIemsDB = async (cartId, quantity) => {
-  return await Cart.findByIdAndUpdate(cartId, { quantity }, { new: true });
-};
+
+
+const updateCartItemDB = async (userId, itemId, quantity) => {
+  if (!quantity) {
+    return await Cart.findOneAndDelete({ user: userId, item: itemId });
+  }
+  return await Cart.findOneAndUpdate({ user: userId, item: itemId }, { quantity }, { new: true });
+}
 
 const deleteCartItemsDB = async (cartId) => {
-  return await Cart.findByIdAndDelete(cartId);
+  return await Cart.findOneAndDelete(cartId);
 };
 
 module.exports = {
   getCartItemDB,
   addCartItemsDB,
-  updateCartIemsDB,
+  updateCartItemDB,
   deleteCartItemsDB,
 };

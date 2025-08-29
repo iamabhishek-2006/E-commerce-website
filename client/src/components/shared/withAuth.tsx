@@ -6,12 +6,15 @@ import { useNavigate } from "react-router-dom";
 const withAuth =
   (WrappedComponent: ElementType, isAuth = true) =>
   (props: any) => {
+    // const pathname = useMemo(() => window.location.pathname, []);
     const navigate = useNavigate();
     const { user, loading } = useAuth();
 
+    // console.log(pathname);
+
     useEffect(() => {
       if (!user && !loading && isAuth) {
-        navigate("/signin");
+        navigate(`/signin`);
       }
 
       if (user && !isAuth) {

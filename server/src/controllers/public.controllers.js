@@ -26,7 +26,6 @@ const getAllCategories = async (req, res) => {
 
 const getProductsByCategory = async (req, res) => {
   const { category } = req.params;
-  // console.log(category);
   try {
     const data = await getProductsByCategoryDB(category);
     console.log(data);

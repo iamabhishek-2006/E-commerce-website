@@ -9,17 +9,20 @@ import Products from "./pages/Products";
 import Navbar from "./components/shared/Navbar";
 import ProductDetails from "./pages/ProductDetails";
 import Wishlist from "./pages/Wishlist";
+import Checkout from "./pages/Checkout";
 
 const App = () => {
   return (
     <BrowserRouter>
-      <Navbar/>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/product/:slug" element={<ProductDetails/>} /> // single product info
+        <Route path="/product/:slug" element={<ProductDetails />} /> // single
+        product info
         <Route path="/products/:category" element={<Products />} />
-        <Route path="/cart" element={<Cart/>}/>
-        <Route path="/wishlist" element={<Wishlist/>}/>
+        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="checkout" element={<Checkout />} />
+        {/* <Route path="/order/:id" element={<OrderDetail />} /> */}
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/cart" element={<Cart />} />

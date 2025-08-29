@@ -28,7 +28,6 @@ const getProductsByCategoryDB = async (slug) => {
   // get Cateogory data
 
   const cd = await category.findOne({ slug });
-  console.log(cd);
   if (!cd) {
     return { error: "Category not found" };
   }
@@ -39,7 +38,6 @@ const getProductsByCategoryDB = async (slug) => {
 };
 
 const getProductBySlugDB = async (slug) => {
-  // console.log(slug);
   const product =await Product.findOne({ slug }).populate("category");
   const images=await Image.find({product_id:product._id});
   return {...product._doc,images};

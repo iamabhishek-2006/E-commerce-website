@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useFetch } from "@/hooks/useFetch";
+import useUserStore from "@/store/user.Store";
 import type { IProduct } from "@/types/Index";
 import {  Heart } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const Home = () => {
   const { data: categories, loading: categoriesLoading } = useFetch( "http://localhost:4000/categories");
@@ -47,18 +49,122 @@ const Category = ({ name, slug }: { name: string; slug: string }) => {
 };
 
 const Product = (data: IProduct) => {
+  const { user, wishlist, addWishlistItem, removeWishlistItem } =
+    useUserStore();
+  const router = useNavigate();
+
+  const wishListObj = {
+    _id: data._id,
+    title: data.title,
+    images: [data.images[0]],
+    slug: data.slug,
+    price:data.price,
+    mrp:data.mrp,
+  };
+
+  const addToWishlist = async() => {
+    try {
+      // check if user is logged in
+
+      if (!user) {
+        router(`/signin?redirect=/product/${data.slug}`);
+        return;
+      }
+
+      // add item into client wishlist
+
+      addWishlistItem({ item: wishListObj });
+
+      // add item into server wishlist
+
+      const res = await fetch(`http://localhost:4000/user/wishlist`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({ item: data._id }),
+      });
+      const json = await res.json();
+      // console.log(json);
+      if (!json.success) {
+        toast.error(json.error);
+        // remove item from client wishlist
+        removeWishlistItem(data._id);
+        return;
+      }
+      toast.success("Added to wishlist");
+    } catch (error) {
+      console.log(error);
+      toast.error("something went wrong");
+      removeWishlistItem(data._id);
+    }
+  };
+
+  const removeFromWishlist = async () => {
+    try {
+      // remove item from client wishlist
+      removeWishlistItem(data._id);
+
+      // remove item from server wishlist
+      const res = await fetch(
+        `http://localhost:4000/user/wishlist/${data._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      const json = await res.json();
+      if (!json.success) {
+        toast.error(json.error || "something went wrong!");
+        // add item into client wishlist
+        addWishlistItem({ item: wishListObj });
+        return;
+      }
+      toast.success("Removed from wishlist!");
+    } catch (error) {
+      console.log(error);
+      toast.error("something went wrong!");
+      // add item into client wishlist
+      addWishlistItem({ item: wishListObj });
+    }
+  };
+
+  // @ts-ignore
+  const isInWishlist = wishlist?.some(
+    (item) => (item.item?._id || item.item) === data._id
+  );
+
   return (
+    
     <Link to={`/product/${data.slug}`}>
       <Card className="relative w-[200px] p-0 overflow-hidden gap-0">
-        <div className="absolute top-2 right-2 cursor-pointer">
-          <Heart className="text-red-400" />
+        <div
+          className="absolute top-2 right-2 cursor-pointer z-10"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
+          >
+          {isInWishlist ? (
+            <Heart
+            fill="red"
+            className="text-red-500"
+            onClick={removeFromWishlist}
+            />
+          ) : (
+            <Heart onClick={addToWishlist} />
+          )}
         </div>
         <div className="w-full h-[250px]">
           <img
-            src={data.images[0]?.url}
+            src={data.images[0].url}
             alt=""
             className="w-full h-full object-cover"
-          />
+            />
         </div>
         <div className="p-2">
           <h1 className="text-sm font-semibold line-clamp-2">{data.title}</h1>
@@ -70,6 +176,27 @@ const Product = (data: IProduct) => {
       </Card>
     </Link>
   );
+  // <Link to={`/product/${data.slug}`}>
+  //   <Card className="relative w-[200px] p-0 overflow-hidden gap-0">
+  //     <div className="absolute top-2 right-2 cursor-pointer">
+  //       <Heart className="text-red-400" />
+  //     </div>
+  //     <div className="w-full h-[250px]">
+  //       <img
+  //         src={data.images[0]?.url}
+  //         alt=""
+  //         className="w-full h-full object-cover"
+  //       />
+  //     </div>
+  //     <div className="p-2">
+  //       <h1 className="text-sm font-semibold line-clamp-2">{data.title}</h1>
+  //       <div className="pt-3">
+  //         <span className="font-semibold">₹{data.price}</span>/
+  //         <span className="line-through text-xs">₹{data.mrp}</span>
+  //       </div>
+  //     </div>
+  //   </Card>
+  // </Link>
 };
 
 

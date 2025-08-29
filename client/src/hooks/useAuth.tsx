@@ -1,10 +1,9 @@
 import { url } from "@/lib/utils";
 import useUserStore from "@/store/user.Store";
 import { useEffect, useState } from "react";
-import { toast } from "sonner";
 
 export const useAuth = () => {
-  const { user, setUser,setCart,setWishlist } = useUserStore();
+  const { user, setUser,setCart,setWishlist, setAddresses,setLoading:setUserLoading } = useUserStore();
   const token = localStorage.getItem("token");
   const [loading, setLoading] = useState(token ? true : false);
 
@@ -24,18 +23,24 @@ export const useAuth = () => {
             setUser(data.data.user);
             setCart(data.data.cart);
             setWishlist(data.data.wishlist);
+            setAddresses(data.data.addresses);
           } else {
             throw new Error(data.error || "something went wrong!");
           }
         } catch (error: any) {
+          // alert (error)
           localStorage.removeItem("token");
           localStorage.removeItem("refToken");
         } finally {
           setLoading(false);
+          setUserLoading(false);
         }
       };
 
       fetchInfo();
+    }else{
+      setLoading(false);
+      setUserLoading(false);
     }
   }, []);
 
