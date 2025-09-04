@@ -39,17 +39,17 @@ const createProduct = async (req, res) => {
     return res.json({
       success: false,
       error: "All fields are required",
-      required: [
-        "title",
-        "description",
-        "price",
-        "mrp",
-        "rating",
-        "stock",
-        "category",
-      ],
+      required: [  "title","description","price","mrp","rating","stock","category" ]
     });
   }
+
+  if(mrp<price){
+    return res.json({
+      success:false,
+      erorr:"MRP should be greater than price",
+    })
+  }
+
   const slug = generateSlug(title);
   try {
     const data = await createProductDB({
@@ -99,7 +99,7 @@ const deleteProduct = async (req, res) => {
 
   try {
     const result = await deleteProductDB(id);
-    return res.json({ success: true, data: "Product deleted successfully" });
+    return res.json({ success: true, data: "Product deleted successfully" ,result});
   } catch (error) {
     return res.json({ success: false, error: "something went wrong" });
   }
@@ -126,7 +126,7 @@ const addProductImages = async (req, res) => {
 const deleteProductImage = async (req, res) => {
   const { public_id } = req.body;
 
-  console.log(public_id);
+  // console.log(public_id);
 
   if (!public_id) {
     return res.json({
@@ -139,7 +139,7 @@ const deleteProductImage = async (req, res) => {
   try {
     // delete from cloudinary
     const result = await deleteImage(public_id);
-    console.log(result);
+    // console.log(result);
     if (!result.success) {
       return res.json({
         success: false,

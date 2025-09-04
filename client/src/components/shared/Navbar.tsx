@@ -77,7 +77,7 @@ const Navbar = () => {
             <Avatar className="cursor-pointer">
               {/* <AvatarImage src="https://github.com/shadcn.png" /> */}
               <AvatarFallback className="uppercase">
-                {user.name?.[0] || "U"}
+                {user.name?.[0] || "U" }
               </AvatarFallback>
             </Avatar>
           </div>

@@ -8,6 +8,7 @@ import DeleteProduct from "../dailogs/DeleteProduct";
 
 const Products = () => {
   const [data, setData] = useState([]);
+  // console.log(data);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -24,7 +25,7 @@ const Products = () => {
   // console.log(data);
 
   const updateProduct = (id, newData) => {
-    console.log(id);
+    // console.log(id);
     setData(
       data.map((item) => {
         if (item._id === id) {

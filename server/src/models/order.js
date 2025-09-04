@@ -20,6 +20,7 @@ const orderSchema = new mongoose.Schema(
     },
     totalAmount: { type: Number, require: true },
     paymentMethod: { type: String, require: true, enum: ["COD","Online"] },
+    paymentStatus:{type:String,enum:["pending","paid","failed"]},
     shippingAddress: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Address",

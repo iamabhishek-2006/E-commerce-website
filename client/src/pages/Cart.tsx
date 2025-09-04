@@ -11,14 +11,14 @@ const Cart = () => {
   const { cart, loading } = useUserStore();
 
   return (
-    <div className="p-3 max-w-7xl mx-auto">
+    <div className="p-3 max-w-7xl mx-auto ">
       <h1 className="text-xl font-semibold my-3">All Products</h1>
       {loading && <p>loading cart itmes</p>}
 
       {cart && cart.length === 0 && <p>Cart is empty</p>}
       {cart?.length && (
         <div className="flex gap-2 flex-col md:flex-row">
-          <div className="flex gap-2 flex-wrap flex-1 h-fit">
+          <div className="flex gap-2 flex-col flex-1 h-fit">
             {cart &&
               cart.map((product: any) => (
                 <Product key={product._id} {...product} />

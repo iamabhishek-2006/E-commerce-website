@@ -7,6 +7,8 @@ import { LoaderCircle, Pencil, X } from "lucide-react";
 const Product = () => {
   const { slug } = useParams();
   const [data, setData] = useState(null);
+  console.log(data);
+  console.log("set data",setData);
   const [loading, setLoading] = useState(true);
 
   const [images, setImages] = useState([]);

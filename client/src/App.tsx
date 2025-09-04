@@ -10,6 +10,7 @@ import Navbar from "./components/shared/Navbar";
 import ProductDetails from "./pages/ProductDetails";
 import Wishlist from "./pages/Wishlist";
 import Checkout from "./pages/Checkout";
+import OrderDetails from "./pages/OrderDetails";
 
 const App = () => {
   return (
@@ -22,7 +23,7 @@ const App = () => {
         <Route path="/products/:category" element={<Products />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="checkout" element={<Checkout />} />
-        {/* <Route path="/order/:id" element={<OrderDetail />} /> */}
+        <Route path="/order/:id" element={<OrderDetails />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/cart" element={<Cart />} />

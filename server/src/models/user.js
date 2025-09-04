@@ -5,7 +5,6 @@ const userSchema=new mongoose.Schema({
     password:{type:String,required:true},
     name:{type : String,require:true},
     role:{type:String,enum:["user","admin"],default:"user"},
-    // address:[{type:mongoose.Schema.Types.ObjectId,ref:"Address"}]
 },{
     versionKey:false
 });
@@ -14,6 +13,5 @@ const userSchema=new mongoose.Schema({
 
 const User=mongoose.model("User",userSchema);
 module.exports=User;
-
 
 

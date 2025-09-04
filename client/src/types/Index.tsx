@@ -31,17 +31,17 @@ export interface IUser {
   role: string;
 }
 
-export interface ICart{
-  _id?:string;
-  quantity:number;
-  item:{
-    _id:string;
-    title:string;
-    slug:string;
-    images:IImage[];
-    price:number,
-    mrp:number;
-  }
+export interface ICart {
+  _id?: string;
+  quantity: number;
+  item: {
+    _id: string;
+    title: string;
+    slug: string;
+    images: IImage[];
+    price: number;
+    mrp: number;
+  };
 }
 
 export interface IWishlist {
@@ -51,12 +51,10 @@ export interface IWishlist {
     title: string;
     slug: string;
     images: IImage[];
-    price:number;
-    mrp:number;
+    price: number;
+    mrp: number;
   };
 }
-
-
 
 export interface IAddress {
   _id: string;
@@ -68,4 +66,38 @@ export interface IAddress {
   city: string;
   postalCode: string;
   country: string;
+}
+
+export interface IOrder {
+  _id: string;
+  user: IUser;
+  orderItems: IOrderProduct[];
+  status: string;
+  shippingAddress: IAddress;
+  paymentMethod: string;
+  paymentStatus: string;
+  totalAmount: number;
+
+  createdAt: string;
+  // paymentResult: string;
+  // itemsPrice: number;
+  // shippingPrice: number;
+  // taxPrice: number;
+  // isPaid: boolean;
+  // paidAt: string;
+  // isDelivered: boolean;
+  // deliveredAt: string;
+}
+
+export interface IOrderProduct {
+  _id?: string;
+  quantity: number;
+  product: {
+    _id: string;
+    title: string;
+    slug: string;
+    images: IImage[];
+    price: number;
+    mrp: number;
+  };
 }

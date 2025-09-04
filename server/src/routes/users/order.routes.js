@@ -3,11 +3,12 @@ const {
   getOrders,
   createOrder,
   cancelOrder,
+  getOrderDetail,
 } = require("../../controllers/users/order.contollers");
 
 const router = express.Router();
 router.get("/", getOrders);
-// router.get("/:id", getOrderDetail);
+router.get("/:id", getOrderDetail);
 router.post("/", createOrder);
 router.put("/cancel/:id", cancelOrder);
 
