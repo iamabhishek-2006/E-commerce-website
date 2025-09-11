@@ -125,7 +125,7 @@ const OrderDetail = () => {
             <p className="text-sm">
               Status:{" "}
               <Badge
-                // variant={getStatusVariant(data.paymentStatus)}
+                variant={getStatusVariant(data.paymentStatus)}
                 className="font-semibold uppercase"
               >
                 {data.paymentStatus || "pending"}

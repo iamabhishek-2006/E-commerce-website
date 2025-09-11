@@ -1,11 +1,19 @@
 const Order = require("../../models/order")
 
-const updateOrderStatusDB=async(id,body)=>{
-    return await Order.findByIdAndUpdate(id,body, { new: true });
-}
+// const updateOrderStatusDB=async(id,body)=>{
+    
+    // return await Order.findByIdAndUpdate(id,body, { new: true });
+// }
 
-const getAllOrdersDB=async()=>{
-    return await Order.find({})
-}
+// const getAllOrdersDB=async()=>{
+//     return await Order.find({})
+// }
+const updateOrderStatusDB = async (id, status) => {
+  return await Order.findByIdAndUpdate(id, { status }, { new: true });
+};
+
+const getAllOrdersDB = async () => {
+  return await Order.find({}).populate({ path: "user", select: "name email" });
+};
 
 module.exports={updateOrderStatusDB,getAllOrdersDB}

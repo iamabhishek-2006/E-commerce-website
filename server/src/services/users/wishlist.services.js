@@ -26,18 +26,6 @@ const moveToCartDB=async(id,userId)=>{
     await session.withTransaction(async()=>{
       await WishList.findOneAndDelete({item:id},{session});
 
-      // check item in cart
-      // ...
-      // if already in cart,update quantity
-      // ...
-      // if not in cart, add to cart
-
-    //   const cart=new Cart({
-    //     user:userId,
-    //     item:id,
-    //     quantity:1,
-    //   })
-    //   await cart.save({session});
      await Cart.findOneAndUpdate(
        { user: userId, item: id },
        { $inc: { quantity: 1 } },

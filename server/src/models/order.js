@@ -6,26 +6,14 @@ const orderSchema = new mongoose.Schema(
     orderItems: [
       {
         quantity: { type: Number, require: true, min: 1 },
-        product: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Product",
-          require: true,
-        },
+        product: { type: mongoose.Schema.Types.ObjectId, ref: "Product", require: true },
       },
     ],
-    status: {
-      type: String,
-      default: "pending",
-      enum: ["pending", "shipped", "delivered", "canceled"],
-    },
+    status: { type: String, default: "pending", enum: ["pending", "shipped", "delivered", "canceled"]},
     totalAmount: { type: Number, require: true },
     paymentMethod: { type: String, require: true, enum: ["COD","Online"] },
     paymentStatus:{type:String,enum:["pending","paid","failed"]},
-    shippingAddress: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Address",
-      require: true,
-    },
+    shippingAddress: { type: mongoose.Schema.Types.ObjectId, ref: "Address", require: true},
   },
   { timestamps: true }
 );

@@ -6,8 +6,6 @@ module.exports = (req, res, next) => {
   if (!isValid)
     return res.status(401).json({ success: false, error: "Unauthorized" });
  
-
-
   try {
     const token = req.headers.authorization.split(" ")[1];
     const payload = verifyToken(token);

@@ -10,13 +10,18 @@ import { toast } from "sonner";
 const Cart = () => {
   const { cart, loading } = useUserStore();
 
+  if(!cart) return null;
+
   return (
     <div className="p-3 max-w-7xl mx-auto ">
       <h1 className="text-xl font-semibold my-3">All Products</h1>
       {loading && <p>loading cart itmes</p>}
-
-      {cart && cart.length === 0 && <p>Cart is empty</p>}
-      {cart?.length && (
+      {cart && cart.length === 0 && (
+        <div className="h-[calc(100vh-200px)] flex items-center justify-center">
+          <p className="text-xl font-semibold font-mono">Cart is empty</p>
+        </div>
+      )}
+      {cart?.length! > 0 && (
         <div className="flex gap-2 flex-col md:flex-row">
           <div className="flex gap-2 flex-col flex-1 h-fit">
             {cart &&
@@ -35,14 +40,25 @@ const Cart = () => {
             </div>
             <div className="flex justify-between border-b border-gray-300">
               <span className="font-semibold">Total Price:</span>
-                <span className="font-semibold">
-                ₹{cart.reduce((acc, item) => acc + item.quantity * item.item.price,0  )}
-              </span> 
+              <span className="font-semibold">
+                ₹
+                {cart.reduce(
+                  (acc, item) => acc + item.quantity * item.item.price,
+                  0
+                )}
+              </span>
             </div>
             <div className="flex justify-between border-b border-gray-300">
               <span className="font-semibold">Discount:</span>
-              <span className="font-semibold"> {cart.reduce(  (acc, item) => acc + item.quantity * item.item.mrp, 0  ) -  cart.reduce(  (acc, item) => acc + item.quantity * item.item.price,
-0
+              <span className="font-semibold">
+                {" "}
+                {cart.reduce(
+                  (acc, item) => acc + item.quantity * item.item.mrp,
+                  0
+                ) -
+                  cart.reduce(
+                    (acc, item) => acc + item.quantity * item.item.price,
+                    0
                   )}
               </span>
             </div>

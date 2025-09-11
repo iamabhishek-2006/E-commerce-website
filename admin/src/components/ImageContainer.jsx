@@ -21,12 +21,12 @@ const ImageContainer = ({ productId, limit }) => {
       return;
     }
 
-    // for (let i = 0; i < selectedFiles.length; i++) {
-    //   if (selectedFiles[i].size > 5 * 1024 * 1024) {
-    //     alert("Image size must be less than 5MB.");
-    //     return;
-    //   }
-    // }
+    for (let i = 0; i < selectedFiles.length; i++) {
+      if (selectedFiles[i].size > 5 * 1024 * 1024) {
+        alert("Image size must be less than 5MB.");
+        return;
+      }
+    }
 
     setFiles([...files, ...selectedFiles]);
   };

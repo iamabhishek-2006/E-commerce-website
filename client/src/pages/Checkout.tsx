@@ -76,7 +76,7 @@ const Checkout = () => {
   };
 
   return (
-    <div className="p-3 max-w-2xl mx-auto flex">
+    <div className="p-3 max-w-2xl mx-auto ">
       <h1 className="text-2xl font-semibold my-3">Fill your details</h1>
 
       <div className="flex gap-2 flex-col">
