@@ -27,15 +27,7 @@ const getProducts = async (req, res) => {
 const createProduct = async (req, res) => {
   const { title, description, price, mrp, rating, stock, category } = req.body;
 
-  if (
-    !title ||
-    !description ||
-    !price ||
-    !mrp ||
-    !rating ||
-    !stock ||
-    !category
-  ) {
+  if (  !title ||  !description ||  !price ||  !mrp ||  !rating ||  !stock ||  !category) {
     return res.json({
       success: false,
       error: "All fields are required",
@@ -52,16 +44,7 @@ const createProduct = async (req, res) => {
 
   const slug = generateSlug(title);
   try {
-    const data = await createProductDB({
-      title,
-      slug,
-      description,
-      price,
-      mrp,
-      rating,
-      category,
-      stock,
-    });
+    const data = await createProductDB({  title,  slug,  description,  price,  mrp,  rating,  category,  stock});
     return res.json({
       success: true,
       message: "Product create successfully",
@@ -126,7 +109,6 @@ const addProductImages = async (req, res) => {
 const deleteProductImage = async (req, res) => {
   const { public_id } = req.body;
 
-  // console.log(public_id);
 
   if (!public_id) {
     return res.json({

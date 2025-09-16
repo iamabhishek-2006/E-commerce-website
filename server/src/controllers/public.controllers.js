@@ -52,7 +52,8 @@ const getProductBySlug = async (req, res) => {
 
     return res.json({ success: true, data });
   } catch (error) {
-    return res.json({ success: false, error: "something went wrong!" });
+    console.log(error);
+    return res.status(500).json({ success: false, error: "something went wrong!" });
   }
 };
 
