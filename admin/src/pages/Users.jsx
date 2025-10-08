@@ -1,18 +1,3 @@
-// import React from 'react'
-// import Layout from '../components/Layout'
-// import withAuth from '../components/withAuth';
-
-// const Users = () => {
-//   return (
-//     <Layout>
-//       <div>Users</div>
-//     </Layout>
-//   );
-// }
-
-// export default withAuth(Users);
-
-
 import React, { useEffect, useState } from 'react'
 import Layout from '../components/Layout'
 import withAuth from '../components/withAuth';

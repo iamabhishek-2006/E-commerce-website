@@ -57,7 +57,6 @@ const Categories = () => {
      };
      fetchData();
   },[]);
-  console.log(data);
 
   return (
     <Layout>

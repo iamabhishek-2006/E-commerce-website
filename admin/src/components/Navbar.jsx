@@ -1,5 +1,4 @@
 import { PanelRightClose, ShieldUser, PanelRightOpen } from "lucide-react";
-import React from 'react'
 import { useContext } from "react";
 import { appStore } from "../store/app.store";
 import { authStore } from "../store/auth.store";

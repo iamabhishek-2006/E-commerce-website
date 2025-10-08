@@ -13,11 +13,9 @@ const getOrderDetail = async (req, res) => {
 };
 
 const createOrder=(req,res)=>{
-    // const {user,orderItems,totalAmount,paymentMethod,shippingAddress}=req.body;
     const userId=req.user.id;
     const {orderItems,totalAmount,paymentMethod,shippingAddress}=req.body;
 
-    // if(!user || !orderItems || !totalAmount, !paymentMethod,shippingAddress)
     if(!orderItems || !totalAmount || !paymentMethod || !shippingAddress)
       {
       return res.json({success:false,error:"All fields are required"});
@@ -54,8 +52,6 @@ const cancelOrder=async(req,res)=>{
     error:"something went wrong!",
   });
   }
-
-
 }
 
 module.exports={getOrderDetail,getOrders,createOrder,cancelOrder};

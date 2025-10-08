@@ -22,7 +22,6 @@ const verifyToken = (token) => {
 const hashPassword = (password) => {
   return bcrypt.hash(password, 12);
 };
-//werfwfg
 
 const verifyPassword = (password, hashPassword) => {
   return bcrypt.compare(password, hashPassword);

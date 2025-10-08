@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-// import type { ICategory } from "../types";
-// import type { ICategory, IProduct } from "../types/Index";
 
 export const useFetch = (url: string,dataType?:any) => {
   const [loading, setLoading] = useState(true);

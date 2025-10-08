@@ -21,7 +21,6 @@ const Dailog=({add,open,onClose})=>{
   const [input,setInput]=useState("");
   const [loading, setLoading] = useState(false);
 
-
   const handleCreate=async ()=>{
     // create cateogory api call
       try {
@@ -41,7 +40,6 @@ const Dailog=({add,open,onClose})=>{
         alert(data.error || "something went wrong");
         return;
       }
-      // console.log(data);
       add(data.data);
       setInput("");
       onClose();
@@ -54,11 +52,9 @@ const Dailog=({add,open,onClose})=>{
   }
     return (
       <div
-        className={`${
-          open ? "flex" : "hidden"
-        } fixed top-0 left-0 w-full h-full bg-gray-500/50 justify-center items-center `}
+        className={`${open ? "flex" : "hidden"  } fixed top-0 left-0 w-full h-full bg-gray-500/50 justify-center items-center `}
       >
-        <div  className='bg-white p-4 m-4 w-[500px] relative rounded  '>
+        <div  className='bg-white p-4 m-4 w-[500px]  relative rounded  '>
 
           <button onClick={onClose} className='absolute top-1 right-3 text-xs font-bold ' >X</button>
           <div>
@@ -72,7 +68,9 @@ const Dailog=({add,open,onClose})=>{
               onChange={(e)=>setInput(e.target.value)}/>
               
             </div>
-            <button disabled={!input || loading} className= {`float-left  w-fit  bg-blue-400 cursor-pointer p-1 text-xs px-2 rounded text-white font-semibold disabled:opacity-50  disabled:cursor-not-allowed ${!input && "disabled:cursor-not-allowed"} ${loading && "disabled:cursor-progress"}`}
+            <button disabled={!input || loading} className= {`float-left  w-fit  bg-blue-400 cursor-pointer p-1 text-xs px-2 rounded
+             text-white font-semibold disabled:opacity-50  disabled:cursor-not-allowed
+              ${!input && "disabled:cursor-not-allowed"} ${loading && "disabled:cursor-progress"}`}
             onClick={handleCreate}
              >
               {loading ? "creating..." :"Create"}

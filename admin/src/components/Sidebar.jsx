@@ -1,5 +1,4 @@
 import { Package, List, Users, Blocks, Home } from "lucide-react";
-import React from "react";
 import { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { appStore } from "../store/app.store";

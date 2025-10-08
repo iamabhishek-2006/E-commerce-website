@@ -48,7 +48,7 @@ const login = async (req, res) => {
   if ((!email, !password)) {
     return res.json({
       success: false,
-      error: "Email a password is required",
+      error: "Email & password is required",
     });
   }
 

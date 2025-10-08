@@ -53,7 +53,7 @@ const Login = () => {
     if (localStorage.getItem("token")) {
       window.location.href = "/";
     }
-  }, []);
+  }, []);    // render only one time (1 hi baar chalega)
 
   return (
     <div className="flex justify-center items-center h-screen ">
