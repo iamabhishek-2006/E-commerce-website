@@ -26,7 +26,7 @@ const Sidebar = () => {
         ${sidebar ? "translate-x-0" : "-translate-x-full"}`}
       >
         {/* Gradient Background */}
-        <div className="bg-gradient-to-b from-blue-600 to-purple-600 text-white w-[250px] h-full py-4">
+        <div className="bg-gradient-to-b from-blue-600 bg-white text-white w-[250px] h-full py-4">
           {/* Header */}
           <div className="flex justify-between items-center px-4">
             <h1 className="text-lg font-bold">Hi, User</h1>
@@ -42,7 +42,7 @@ const Sidebar = () => {
           {/* Content */}
           <div className="px-4 space-y-3">
             <p className="hover:bg-white/20 p-2 rounded-md cursor-pointer transition">
-              Dashboard
+              Home
             </p>
             <p className="hover:bg-white/20 p-2 rounded-md cursor-pointer transition">
               Products

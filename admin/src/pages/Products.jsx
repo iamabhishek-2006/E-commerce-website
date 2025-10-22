@@ -57,7 +57,6 @@ const Products = () => {
           alert(data.error || "somthing went wrong");
           return;
         }
-        // console.log(data)
         setData(data.data);
 
         // fetch categories

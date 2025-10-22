@@ -78,7 +78,6 @@ const Login = () => {
           type="password"
           placehoder="Enter your Password"
         />
-        <div></div>
         <div>
           <button
             disabled={loading}
@@ -110,9 +109,7 @@ const InputBox = ({ value, update, type, placehoder }) => {
     <input
       value={value}
       name={type}
-      onChange={(e) =>
-        update((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-      }
+      onChange={(e) => update((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
       type={type}
       placeholder={placehoder}
       className="border border-gray-300 rounded text-[12px] p-1"

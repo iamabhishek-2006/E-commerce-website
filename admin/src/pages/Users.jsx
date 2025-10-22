@@ -9,7 +9,6 @@ const Users = () => {
     const getData = async () => {
       try {
         const url = import.meta.env.VITE_SERVER_URL;
-        console.log(url)
         const res = await fetch("http://localhost:4000/admin/users", {
           method: "GET",
           headers: {
@@ -25,15 +24,13 @@ const Users = () => {
         }
         setAdmins(data.data.filter((user) => user.role === "admin"));
         setUsers(data.data.filter((user) => user.role === "user"));
-        // console.log(data.data);
       } catch (error) {
         console.log(error);
       }
     };
     getData();
   }, []);
-  // console.log(admins);
-  // console.log(users);
+
   return (
     <Layout>
       <div className="flex justify-between items-center p-3 border-b border-gray-300 h-[50px] select-none">
@@ -54,9 +51,6 @@ const Users = () => {
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Role
               </th>
-              {/* <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Actions
-                </th> */}
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200 ">

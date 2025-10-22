@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 const NewProduct = ({ addProduct, categories }) => {
     const [open, setOpen] = useState(false);
-
     return (
         <div>
             <button
@@ -31,7 +30,6 @@ const Dialog = ({ addProduct, open, onClose, categories }) => {
     const handleChange = (e) => {
         setFormState({ ...formState, [e.target.name]: e.target.value });
     };
-    // console.log(formState)
     const handleSubmit = async () => {
         try {
             setLoading(true);
@@ -165,7 +163,6 @@ const Dialog = ({ addProduct, open, onClose, categories }) => {
                                 ))}
                             </select>
                         </div>
-
                         <div>
                             <button disabled={loading}
                                 onClick={handleSubmit} className="mt-5 bg-blue-400 cursor-pointer p-1 text-xs px-2 rounded text-white font-semibold">

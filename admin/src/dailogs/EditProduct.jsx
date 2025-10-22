@@ -121,7 +121,7 @@ const Dialog = ({ id, item, categories, update, open, onClose }) => {
                 <label className="text-sm">Price</label>
                 <input
                   name="price"
-                  className="w-full rounded border text-sm border-gray-300 p-1"
+                  className="w-half rounded border text-sm border-gray-300 p-1"
                   type="number"
                   placeholder="Enter the price"
                   value={formState.price}
@@ -132,7 +132,7 @@ const Dialog = ({ id, item, categories, update, open, onClose }) => {
                 <label className="text-sm">MRP</label>
                 <input
                   name="mrp"
-                  className="w-full rounded border text-sm border-gray-300 p-1"
+                  className="w-half rounded border text-sm border-gray-300 p-1"
                   type="number"
                   placeholder="Enter the MRP"
                   value={formState.mrp}
@@ -146,7 +146,7 @@ const Dialog = ({ id, item, categories, update, open, onClose }) => {
                 <label className="text-sm">Stock</label>
                 <input
                   name="stock"
-                  className="w-full rounded border text-sm border-gray-300 p-1"
+                  className="w-half rounded border text-sm border-gray-300 p-1"
                   type="number"
                   placeholder="Enter the stock"
                   value={formState.stock}
@@ -157,7 +157,7 @@ const Dialog = ({ id, item, categories, update, open, onClose }) => {
                 <label className="text-sm">Rating</label>
                 <input
                   name="rating"
-                  className="w-full rounded border text-sm border-gray-300 p-1"
+                  className="w-half rounded border text-sm border-gray-300 p-1"
                   type="number"
                   placeholder="Enter the rating"
                   value={formState.rating}

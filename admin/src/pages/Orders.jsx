@@ -66,7 +66,6 @@ const Orders = () => {
           },
         });
         const data = await res.json();
-        console.log(data);
         if (!data.success) {
           alert(data.error || "Something went wrong!");
           return;

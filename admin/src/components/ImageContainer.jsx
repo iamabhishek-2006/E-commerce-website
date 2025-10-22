@@ -68,7 +68,6 @@ const ImageContainer = ({ productId, limit }) => {
     const data = await Promise.allSettled(
       files.map((file) => uploadImage(file))
     );
-    // console.log(data);
     const imgData = data
       .map((d) => (d.status === "fulfilled" ? d.value : null))
       .filter((value) => value !== null);

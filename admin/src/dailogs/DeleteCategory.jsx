@@ -24,8 +24,7 @@ const Dialog = ({ id, remove, open, onClose }) => {
   const [loading, setLoading] = React.useState(false);
 
   const handleDelete = async () => {
-    console.log(id);
-
+    
     try {
       setLoading(true);
       const url = import.meta.env.VITE_SERVER_URL;
