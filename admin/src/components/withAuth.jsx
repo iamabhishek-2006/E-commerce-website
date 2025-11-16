@@ -14,7 +14,7 @@ const withAuth=(WrappedComponent)=>(props)=>{
     },[loading]);
 
 
-    return user? <WrappedComponent {...props} />:Loading;
+    return user? <WrappedComponent {...props} />: <Loading/>;
 };
 
 const Loading=()=>{

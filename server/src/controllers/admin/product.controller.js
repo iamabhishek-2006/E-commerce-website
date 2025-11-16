@@ -54,7 +54,7 @@ const createProduct = async (req, res) => {
     if (error.code == 11000) {
       return res.json({ success: false, error: "Product already exists" });
     }
-    return res.json({ success: false, error: "something went wrong" });
+    return res.json({ success: false, error: "something went wrong " });
   }
 };
 

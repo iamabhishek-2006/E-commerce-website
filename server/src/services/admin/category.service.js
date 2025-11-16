@@ -4,7 +4,7 @@ const Product = require("../../models/product");
 
 const getCategroiesDB = async () => {
   const categories = await category.find({}).lean();
-  const categoriesWithTotal = await Promise.all(
+  const categoriesWithTotal = await Promise.all( 
     categories.map(async (cat) => {
       const total = await Product.countDocuments({ category: cat._id });
       return { ...cat, total };
@@ -29,7 +29,7 @@ const deleteCategoryDB = async (id) => {
       await category.findByIdAndDelete(id, { session });
       await Product.deleteMany({ category: id }, { session });
     });
-    console.log(res);
+    console.log(res)
     return {};
   } catch (error) {
     console.log(error);

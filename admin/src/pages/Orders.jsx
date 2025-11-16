@@ -5,6 +5,7 @@ import { useState } from "react";
 
 const Orders = () => {
   const [data, setData] = useState([]);
+  console.log(data,"hid ata");
   const [loading, setLoading] = useState(false);
 
   const handleStatusChange = async (id, status) => {

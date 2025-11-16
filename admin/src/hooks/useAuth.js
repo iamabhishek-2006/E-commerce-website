@@ -12,6 +12,7 @@ export const useAuth=()=>{
             const fetchInfo=async()=>{
                 try {
                 const res=await fetch("http://localhost:4000/user/me?role=admin",{
+
                     method:"GET",
                     headers:{
                         Authorization:`Bearer ${token}`,
@@ -28,7 +29,6 @@ export const useAuth=()=>{
                     localStorage.removeItem("refToken");
 
                     // show toast
-                    // console.log(error);
                 }finally{
                     setloading(false);
                 }

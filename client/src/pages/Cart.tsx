@@ -51,7 +51,6 @@ const Cart = () => {
             <div className="flex justify-between border-b border-gray-300">
               <span className="font-semibold">Discount:</span>
               <span className="font-semibold">
-                {" "}
                 {cart.reduce(
                   (acc, item) => acc + item.quantity * item.item.mrp,
                   0

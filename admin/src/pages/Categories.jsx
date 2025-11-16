@@ -43,7 +43,6 @@ const Categories = () => {
             },
           });
           const data = await res.json();
-
           if (!data.success) {
             alert(data.error || "something went wrong");
             return;
@@ -65,7 +64,7 @@ const Categories = () => {
         <NewCategories add={addCategory} />
       </div>
       <div className="flex justify-center items-center ">
-        {!data.length && loading && <h1>Loading...</h1>}{" "}
+        {!data.length && loading && <h1>Loading...</h1>}
       </div>
       {data.length !== 0 && (
         <div>

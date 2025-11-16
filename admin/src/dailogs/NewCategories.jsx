@@ -34,7 +34,6 @@ const Dailog=({add,open,onClose})=>{
         body:JSON.stringify({name:input.trim()}),
       });
       const data=await res.json();
-      
       if(!data.success){
         // show toast
         alert(data.error || "something went wrong");
@@ -56,7 +55,7 @@ const Dailog=({add,open,onClose})=>{
       >
         <div  className='bg-white p-4 m-4 w-[500px]  relative rounded  '>
 
-          <button onClick={onClose} className='absolute top-1 right-3 text-xs font-bold ' >X</button>
+          <button onClick={onClose} className='absolute top-1 right-3 text-xs font-bold cursor-pointer' >X</button>
           <div>
             <h1 className='font-bold'>Add new categories</h1>
             <div className='flex gap-2 items-center mt-5'>

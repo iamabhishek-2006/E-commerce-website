@@ -13,7 +13,7 @@ export interface IProduct {
   mrp: number;
   rating: number;
   stock: number;
-  category: ICategory | string;
+  category: ICategory | string;  // extend
   images: IImage[];
 }
 
@@ -79,14 +79,6 @@ export interface IOrder {
   totalAmount: number;
 
   createdAt: string;
-  // paymentResult: string;
-  // itemsPrice: number;
-  // shippingPrice: number;
-  // taxPrice: number;
-  // isPaid: boolean;
-  // paidAt: string;
-  // isDelivered: boolean;
-  // deliveredAt: string;
 }
 
 export interface IOrderProduct {

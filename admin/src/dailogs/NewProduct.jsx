@@ -44,7 +44,7 @@ const Dialog = ({ addProduct, open, onClose, categories }) => {
             });
             const data = await res.json();
             if (!data.success) {
-                alert(data.error || "somthing went wrong!");
+                alert(data.error || "somthing went wrong !");
                 return;
             }
             addProduct(data.data);
@@ -64,8 +64,6 @@ const Dialog = ({ addProduct, open, onClose, categories }) => {
             setLoading(false)
         }
     }
-
-
 
     return (
         <div

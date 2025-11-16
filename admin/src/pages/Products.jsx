@@ -54,7 +54,7 @@ const Products = () => {
         });
         const data = await res.json();
         if (!data.success) {
-          alert(data.error || "somthing went wrong");
+          alert(data.error || "somthing went wrong ");
           return;
         }
         setData(data.data);
